@@ -28,6 +28,7 @@ repositories {
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter')
+	compile('org.springframework.boot:spring-boot-starter')
 	compile ('com.graphql-java:graphql-java:2.4.0')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
