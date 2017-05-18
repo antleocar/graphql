@@ -54,8 +54,6 @@ public class ObjectSchema {
         .type(new GraphQLList(qlInterfaceType)))
       .build();
 
-  Car car = new Car("Tesla",7000000.0);
-
   public static GraphQLObjectType CarType = newObject()
       .name("Car")
       .field(newFieldDefinition()
@@ -68,13 +66,15 @@ public class ObjectSchema {
 
   public void run() {
 
-  GraphQLSchema graphQLSchema = GraphQLSchema.newSchema().query(CarType).build();
+    Car car = new Car("Tesla",7000000.0);
 
-  GraphQL graphQL = GraphQL.newGraphQL(graphQLSchema).build();
+    GraphQLSchema graphQLSchema = GraphQLSchema.newSchema().query(CarType).build();
 
-  Map<String, Object> map = graphQL.execute("{model}").getData();
+    GraphQL graphQL = GraphQL.newGraphQL(graphQLSchema).build();
 
-  System.out.println(map);
+    Map<String, Object> map = graphQL.execute("{model}").getData();
+
+    System.out.println(map);
 
   }
 
