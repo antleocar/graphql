@@ -4,7 +4,6 @@ package com.graphql;
 import static graphql.Scalars.GraphQLFloat;
 import static graphql.Scalars.GraphQLString;
 
-import com.graphql.dao.Car;
 import com.graphql.dao.User;
 import graphql.GraphQL;
 import graphql.schema.GraphQLInterfaceType;
