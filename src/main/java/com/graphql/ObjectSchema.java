@@ -4,7 +4,6 @@ package com.graphql;
 import static graphql.Scalars.GraphQLFloat;
 import static graphql.Scalars.GraphQLString;
 
-import com.graphql.dao.User;
 import graphql.GraphQL;
 import graphql.schema.GraphQLInterfaceType;
 import graphql.schema.GraphQLList;
@@ -27,18 +26,7 @@ public class ObjectSchema {
       .field(newFieldDefinition()
         .name("name")
         .type(GraphQLString))
-      .typeResolver(new TypeResolver() {
-        @Override
-        public GraphQLObjectType getType(Object object) {
-          if (object instanceof User) {
-            return UserType;
-          } else if (object instanceof Car) {
-            return CarType;
-          } else {
-            return null;
-          }
-        }
-      }).build();
+      .build();
 
   public static GraphQLObjectType UserType = newObject()
       .name("User")
@@ -64,8 +52,6 @@ public class ObjectSchema {
 
 
   public void run() {
-
-    Car car = new Car("Tesla",7000000.0);
 
     GraphQLSchema graphQLSchema = GraphQLSchema.newSchema().query(CarType).build();
 
