@@ -10,7 +10,7 @@ import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 
 @Component
-public class IdGenericDataFetcher implements DataFetcher {
+public class IdDataFetcher implements DataFetcher {
 
   @Autowired
   private RestService restService;

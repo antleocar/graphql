@@ -15,7 +15,7 @@ import graphql.schema.DataFetcher;
 import graphql.schema.DataFetchingEnvironment;
 
 @Component
-public class GenericEmbeddedDataFetcher implements DataFetcher {
+public class EmbeddedDataFetcher implements DataFetcher {
 
   @Autowired
   private RestService restService;

@@ -1,5 +1,6 @@
 package com.graphql.resource;
 
+import com.graphql.dao.schema.ObjectSchema;
 import com.graphql.service.OperationService;
 import graphql.ExecutionResult;
 import graphql.GraphQL;
@@ -21,15 +22,19 @@ public class Operations {
 
   private static Logger log = LoggerFactory.getLogger(Operations.class);
 
-  GraphQL graphQL = new GraphQL();
+  private GraphQL graphQL;
 
   @Autowired
   private OperationService operationService;
+
+  @Autowired
+  private ObjectSchema objectSchema;
 
   @ResponseBody
   @RequestMapping(method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
   public Object insertData(@RequestBody Map map) {
     String query = map.get("query").toString();
+    graphQL = new GraphQL(objectSchema.build());
     Map<String, Object> vars = (Map<String, Object>) map.get("vars");
 
     ExecutionResult executionResult = graphQL.execute(query, (Object) null, vars);

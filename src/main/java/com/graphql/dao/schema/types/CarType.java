@@ -1,6 +1,6 @@
-package com.graphql.dao.schema;
+package com.graphql.dao.schema.types;
 
-import com.graphql.dataFetcher.GenericEmbeddedDataFetcher;
+import com.graphql.dataFetcher.EmbeddedDataFetcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,13 +17,13 @@ import static graphql.schema.GraphQLObjectType.newObject;
 public class CarType {
 
   @Autowired
-  private GenericEmbeddedDataFetcher genericEmbeddedDataFetcher;
+  private EmbeddedDataFetcher embeddedDataFetcher;
 
 
   public GraphQLObjectType buildCarType() {
 
-    genericEmbeddedDataFetcher.setConnection(Boolean.TRUE);
-    genericEmbeddedDataFetcher.setConnectionName("users");
+    embeddedDataFetcher.setConnection(Boolean.TRUE);
+    embeddedDataFetcher.setConnectionName("users");
 
     Relay relay = new Relay();
 
@@ -49,7 +49,7 @@ public class CarType {
             .description("Relations with users")
             .type(new GraphQLTypeReference("UserConnection"))
             .argument(relay.getConnectionFieldArguments())
-            .dataFetcher(genericEmbeddedDataFetcher)
+            .dataFetcher(embeddedDataFetcher)
             .build())
         .build();
   }

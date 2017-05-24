@@ -1,6 +1,6 @@
-package com.graphql.dao.schema;
+package com.graphql.dao.schema.types;
 
-import com.graphql.dataFetcher.GenericEmbeddedDataFetcher;
+import com.graphql.dataFetcher.EmbeddedDataFetcher;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -17,12 +17,12 @@ import static graphql.schema.GraphQLObjectType.newObject;
 public class UserType {
 
   @Autowired
-  private GenericEmbeddedDataFetcher genericEmbeddedDataFetcher;
+  private EmbeddedDataFetcher embeddedDataFetcher;
 
   public GraphQLObjectType buildUserType() {
 
-    genericEmbeddedDataFetcher.setConnection(Boolean.TRUE);
-    genericEmbeddedDataFetcher.setConnectionName("cars");
+    embeddedDataFetcher.setConnection(Boolean.TRUE);
+    embeddedDataFetcher.setConnectionName("cars");
 
     Relay relay = new Relay();
 
@@ -48,14 +48,14 @@ public class UserType {
             .description("Relations with cars")
             .type(new GraphQLTypeReference("carConnection"))
             .argument(relay.getConnectionFieldArguments())
-            .dataFetcher(genericEmbeddedDataFetcher)
+            .dataFetcher(embeddedDataFetcher)
             .build())
         .field(newFieldDefinition()
             .name("userConnection")
             .description("Relations with friends")
             .type(new GraphQLTypeReference("UserConnection"))
             .argument(relay.getConnectionFieldArguments())
-            .dataFetcher(genericEmbeddedDataFetcher)
+            .dataFetcher(embeddedDataFetcher)
             .build())
         .build();
 
